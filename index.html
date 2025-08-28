@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Para Minha Petúnia</title>
+  <title>Para Você</title>
   <style>
     body {
       display: flex;
@@ -10,16 +10,106 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #fff;
+      background-color: #f0f0f0; /* Um fundo suave para o prompt */
+      font-family: sans-serif;
     }
-    img {
+
+    /* Conteúdo principal que ficará oculto */
+    #conteudo-protegido {
+      display: none; /* Inicia oculto */
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    #conteudo-protegido img {
       max-width: 90%;
       max-height: 90%;
       border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
+    
+    /* Estilo para a caixa de senha */
+    #senha-container {
+      text-align: center;
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    #senha-container h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    
+    #senha-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+    
+    #senha-botao {
+      padding: 10px 15px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #senha-botao:hover {
+      background-color: #218838;
+    }
+
   </style>
 </head>
 <body>
-  <img src="for-her.jpg" alt="Minha Petúnia">
+
+  <div id="senha-container">
+    <h2>Acesso Restrito</h2>
+    <p>Por favor, digite a senha para continuar:</p>
+    <input type="password" id="senha-input" placeholder="Senha">
+    <button id="senha-botao" onclick="verificarSenha()">Entrar</button>
+  </div>
+
+  <div id="conteudo-protegido">
+    <img src="for-her.jpg" alt="Minha Primavera">
+  </div>
+
+  <script>
+    function verificarSenha() {
+      // --- ALTERE A SENHA AQUI ---
+      const senhaCorreta = "churros"; // Exemplo de senha. Troque pela sua!
+      
+      var senhaDigitada = document.getElementById("senha-input").value;
+      
+      if (senhaDigitada === senhaCorreta) {
+        // Se a senha estiver correta:
+        // 1. Esconde a caixa de senha
+        document.getElementById("senha-container").style.display = "none";
+        // 2. Mostra o conteúdo protegido
+        document.getElementById("conteudo-protegido").style.display = "flex";
+        // 3. (Opcional) Muda a cor de fundo do corpo da página de volta
+        document.body.style.backgroundColor = "#fff";
+      } else {
+        // Se a senha estiver incorreta:
+        alert("Senha incorreta. Tente novamente.");
+        // Limpa o campo de senha
+        document.getElementById("senha-input").value = "";
+      }
+    }
+    
+    // Opcional: Permite que o usuário aperte "Enter" para tentar a senha
+    document.getElementById("senha-input").addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("senha-botao").click();
+      }
+    });
+  </script>
+
 </body>
 </html>
